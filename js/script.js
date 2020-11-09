@@ -11,6 +11,41 @@ let numberOfLoseSecondPlayer = 0;
 let scoreResult = document.querySelector(".score");
 scoreResult.innerHTML = score;
 
+class Paddle {
+  constructor(x, y) {
+    (this.x = x),
+      (this.y = y),
+      (this.w = 80),
+      (this.h = 10),
+      (this.speed = 8),
+      (this.dx = 0);
+  }
+  drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(this.x, this.y, this.w, this.h);
+    ctx.fillStyle = "#0095dd";
+    ctx.fill();
+  }
+  movePaddle() {
+    this.x += this.dx;
+
+    if (this.x + this.w > canvas.width) {
+      this.x = canvas.width - this.w;
+    }
+
+    if (this.x < 0) {
+      this.x = 0;
+    }
+  }
+}
+
+const FirstPaddle = new Paddle(canvas.width / 2 - 40, canvas.height - 20);
+const SecondPaddle = new Paddle(canvas.width / 2 - 40, 10)
+
+FirstPaddle.drawPaddle();
+SecondPaddle.drawPaddle()
+
+
 const brickRowCount = 9;
 const brickColumnCount = 5;
 
@@ -45,4 +80,4 @@ function drawBricks() {
   });
 }
 
-drawBricks()
+drawBricks();
